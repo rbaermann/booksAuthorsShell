@@ -1,0 +1,150 @@
+In [2]: from apps.books_authors_app.models import *                                                                                   
+
+In [3]: cs = Book.objects.create(title='C Sharp')                                                                                     
+
+In [4]: java = Book.objects.create(title='Java')                                                                                      
+
+In [5]: py = Book.objects.create(title='Python')                                                                                      
+
+In [6]: php = Book.objects.create(title='PHP')                                                                                        
+
+In [7]: ruby = Book.objects.create(title='Ruby')                                                                                      
+
+In [8]: Book.objects.all().values()                                                                                                   
+Out[8]: <QuerySet [{'id': 1, 'title': 'C Sharp', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46562, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150694, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711550, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711638, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 32, 592226, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 27, 32, 592284, tzinfo=<UTC>)}, {'id': 5, 'title': 'Ruby', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 44, 412365, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 27, 44, 412424, tzinfo=<UTC>)}]>
+
+In [9]: ja = Author.objects.create(first_name='Jane', last_name='Austen')                                                             
+
+In [10]: ed = Author.objects.create(first_name='Emily', last_name='Dickinson')                                                        
+
+In [11]: fd = Author.objects.create(first_name='Fyodor', last_name='Dostoevksy')                                                      
+
+In [12]: ws = Author.objects.create(first_name='William', last_name='Shakespeare')                                                    
+
+In [13]: lt = Author.objects.create(first_name='Lau', last_name='Tzu')                                                                
+
+In [15]: Author.objects.all().values()                                                                                                
+Out[15]: <QuerySet [{'id': 1, 'first_name': 'Jane', 'last_name': 'Austen', 'created_at': datetime.datetime(2019, 7, 11, 20, 29, 46, 401196, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 29, 46, 401254, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'Emily', 'last_name': 'Dickinson', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 16, 771316, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 30, 16, 771386, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 42, 293208, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 30, 42, 293272, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'William', 'last_name': 'Shakespeare', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436482, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436539, tzinfo=<UTC>)}, {'id': 5, 'first_name': 'Lau', 'last_name': 'Tzu', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 28, 623723, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 31, 28, 623828, tzinfo=<UTC>)}]>
+
+In [5]: cs.title='C#'                                                                                                                 
+
+In [6]: cs.title                                                                                                                      
+Out[6]: 'C#'
+
+In [9]: ws.first_name='Bill'                                                                                                          
+
+In [10]: ws.first_name                                                                                                                
+Out[10]: 'Bill'
+
+In [19]: ja.books.add(java)                                                                                                           
+
+In [20]: ja.books                                                                                                                     
+Out[20]: <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager at 0x7f4910450f98>
+
+In [21]: ja.books.values()                                                                                                            
+Out[21]: <QuerySet [{'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}]>
+
+In [22]: ja.books.add(cs)                                                                                                             
+
+In [23]: ja.books.values()                                                                                                            
+Out[23]: <QuerySet [{'id': 1, 'title': 'C Sharp', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 40, 26, 995873, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}]>
+
+In [24]: cs.title='C#'                                                                                                                
+
+In [25]: cs.save()                                                                                                                    
+
+In [26]: ja.books.values()                                                                                                            
+Out[26]: <QuerySet [{'id': 1, 'title': 'C#', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 11, 478454, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}]>
+
+In [27]: ja.save()  
+
+In [29]: ed = Author.objects.get(id=2)                                                                                                
+
+In [30]: ed.save()                                                                                                                    
+
+In [31]: py = Book.objects.get(id=3)                                                                                                  
+
+In [32]: py.save()                                                                                                                    
+
+In [33]: ed.books.add(cs)                                                                                                             
+
+In [34]: ed.save()                                                                                                                    
+
+In [35]: ed.books.add(java)                                                                                                           
+
+In [36]: ed.save()                                                                                                                    
+
+In [37]: ed.books.add(py)                                                                                                             
+
+In [38]: ed.save()                                                                                                                    
+
+In [39]: ed.books.values()                                                                                                            
+Out[39]: <QuerySet [{'id': 1, 'title': 'C#', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 11, 478454, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711550, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 49, 55, 813108, tzinfo=<UTC>)}]>
+
+In [44]: fd.books.add(cs)                                                                                                             
+
+In [45]: fd.save()                                                                                                                    
+
+In [46]: fd.books.add(java)                                                                                                           
+
+In [47]: fd.save()                                                                                                                    
+
+In [48]: fd.books.add(py)                                                                                                             
+
+In [49]: fd.save()                                                                                                                    
+
+In [50]: fd.books.add(php)                                                                                                            
+
+In [51]: fd.save()                                                                                                                    
+
+In [52]: fd.books.values()                                                                                                            
+Out[52]: <QuerySet [{'id': 1, 'title': 'C#', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 11, 478454, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711550, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 49, 55, 813108, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 32, 592226, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 53, 9, 248947, tzinfo=<UTC>)}]>
+
+In [58]: ws.books.add(cs)                                                                                                             
+
+In [59]: ws.save()                                                                                                                    
+
+In [60]: ws.books.add(java)                                                                                                           
+
+In [61]: ws.save()                                                                                                                    
+
+In [62]: ws.books.add(py)                                                                                                             
+
+In [63]: ws.save()                                                                                                                    
+
+In [64]: ws.books.add(php)                                                                                                            
+
+In [65]: ws.save()                                                                                                                    
+
+In [66]: ws.books.add(ruby)                                                                                                           
+
+In [67]: ws.save()                                                                                                                    
+
+In [68]: ws.books.values()                                                                                                            
+Out[68]: <QuerySet [{'id': 1, 'title': 'C#', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 11, 478454, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 46, 28, 658876, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711550, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 49, 55, 813108, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 32, 592226, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 53, 9, 248947, tzinfo=<UTC>)}, {'id': 5, 'title': 'Ruby', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 44, 412365, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 27, 44, 412424, tzinfo=<UTC>)}]>
+
+In [69]: py.authors.values()                                                                                                          
+Out[69]: <QuerySet [{'id': 2, 'first_name': 'Emily', 'last_name': 'Dickinson', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 16, 771316, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 51, 27, 201599, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 42, 293208, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 54, 3, 437063, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436482, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 57, 57, 628009, tzinfo=<UTC>)}]>
+
+In [77]: py_delete = py.authors.first()                                                                                               
+
+In [78]: py_delete.delete()                                                                                                           
+Out[78]: (4, {'books_authors_app.Author_books': 3, 'books_authors_app.Author': 1})
+
+In [79]: py.authors.values()                                                                                                          
+Out[79]: <QuerySet [{'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 42, 293208, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 54, 3, 437063, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436482, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 57, 57, 628009, tzinfo=<UTC>)}]>
+
+In [92]: lt = Author.objects.get(id=5)                                                                                                
+
+In [93]: java.authors.add(lt)                                                                                                         
+
+In [94]: java.save()                                                                                                                  
+
+In [95]: java.authors.values()                                                                                                        
+Out[95]: <QuerySet [{'id': 1, 'first_name': 'Jane', 'last_name': 'Austen', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 29, 46, 401196, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 27, 191214, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevksy', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 30, 42, 293208, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 54, 3, 437063, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436482, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 57, 57, 628009, tzinfo=<UTC>)}, {'id': 5, 'first_name': 'Lau', 'last_name': 'Tzu', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 28, 623723, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 31, 28, 623828, tzinfo=<UTC>)}]>
+
+In [99]: fd.books.values()                                                                                                            
+Out[99]: <QuerySet [{'id': 1, 'title': 'C#', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 2, 46467, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 48, 11, 478454, tzinfo=<UTC>)}, {'id': 2, 'title': 'Java', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 26, 50, 150633, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 21, 51, 33, 819903, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 5, 711550, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 49, 55, 813108, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': '', 'created_at': datetime.datetime(2019, 7, 11, 20, 27, 32, 592226, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 53, 9, 248947, tzinfo=<UTC>)}]>
+
+In [100]: ruby.authors.values()                                                                                                       
+Out[100]: <QuerySet [{'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': 'some notes', 'created_at': datetime.datetime(2019, 7, 11, 20, 31, 8, 436482, tzinfo=<UTC>), 'updated_at': datetime.datetime(2019, 7, 11, 20, 57, 57, 628009, tzinfo=<UTC>)}]>
