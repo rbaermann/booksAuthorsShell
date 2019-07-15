@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Authors</title>
+        {% load static %}
+        <link rel='stylesheet' href='{% static "books_authors_app/css/style.css" %}'>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <h1>Add an Author</h1>
+            <form action='/authors/addauthor' method='POST'>
+                {% csrf_token %}
+                <h4>First Name</h4>
+                <input type="text" name='first_name'>
+                <h4>Last Name</h4>
+                <input type="text" name='last_name'>
+                <h4>Notes</h4>
+                <textarea name='notes'></textarea>
+                <input type='submit' value='Add'>
+            </form>
+            <a href='/'>Go to Books</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in authors %}
+                    <tr>
+                        <td>{{ author.id }}</td>
+                        <td>{{ author.first_name }} {{ author.last_name }}</td>
+                        <td><a href='/author/{{ author.id }}/desc'>View</a></td>
+                        <td><a href='/author/{{ author.id }}/destroy'>Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
